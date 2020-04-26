@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Main from './pages/Main';
+import Main from "./pages/Main";
 
 export default function Routes() {
-  return(
+  return (
     <BrowserRouter>
       <Switch>
-        <Route path='/' exact component={Main}/>
+        <Route path="/" exact component={Main} />
       </Switch>
     </BrowserRouter>
-  )
+  );
 }
