@@ -11,11 +11,14 @@ export default function Home() {
           src="https://static.netshoes.com.br/produtos/tenis-asics-gel-kayano-25-feminino/18/D18-2869-118/D18-2869-118_zoom2.jpg?ims=326x"
           alt="Tênis"
         />
-        <strong>Tênis Asics Gel Kayano 25</strong>
+        <strong>
+          Tênis Asics Gel Kayano 25 o que será que vai acontecer quando quebrar
+          a linha?
+        </strong>
         <span>R$ 459,90</span>
         <button type="submit">
           <div>
-            <MdAddShoppingCart size={20} /> <span>3</span>
+            <MdAddShoppingCart size={16} /> <span>3</span>
           </div>
           <strong>Adicionar ao carrinho</strong>
         </button>

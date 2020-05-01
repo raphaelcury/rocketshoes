@@ -11,47 +11,56 @@ export const ProductList = styled.ul`
   li {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
     background: #fff;
     border-radius: 10px;
 
     img {
       max-width: 250px;
+      align-self: center;
     }
 
     > strong {
       color: #333;
-      margin-bottom: 5px;
+      font-size: 16px;
+      line-height: 20px;
     }
 
     > span {
       color: #333;
-      margin-bottom: 5px;
+      font-size: 21px;
+      font-weight: bold;
+      margin: 5px 0 20px;
     }
 
     button {
       display: flex;
       align-items: center;
-      padding: 10px;
+
       background: darkgray;
+      color: black;
       border: 0;
       border-radius: 4px;
+      overflow: hidden;
+      margin-top: auto;
       transition: 0.2s;
 
       &:hover {
-        background: ${darken(0.1, '#A9A9A9')};
+        background: ${darken(0.03, '#A9A9A9')};
       }
 
       div {
         display: flex;
         align-items: center;
-
+        padding: 12px;
+        background: rgb(0, 0, 0, 0.1);
         svg {
           margin-right: 5px;
         }
 
         span {
           font-size: 14px;
+          font-weight: bold;
         }
       }
 
