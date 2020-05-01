@@ -16,7 +16,7 @@ export default function Home() {
           a linha?
         </strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart size={16} /> <span>3</span>
           </div>
@@ -30,7 +30,7 @@ export default function Home() {
         />
         <strong>Tênis Asics Gel Kayano 25</strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart /> <span>3</span>
           </div>
@@ -44,7 +44,7 @@ export default function Home() {
         />
         <strong>Tênis Asics Gel Kayano 25</strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart /> <span>3</span>
           </div>
@@ -58,7 +58,7 @@ export default function Home() {
         />
         <strong>Tênis Asics Gel Kayano 25</strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart /> <span>3</span>
           </div>
@@ -72,7 +72,7 @@ export default function Home() {
         />
         <strong>Tênis Asics Gel Kayano 25</strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart /> <span>3</span>
           </div>
@@ -86,7 +86,7 @@ export default function Home() {
         />
         <strong>Tênis Asics Gel Kayano 25</strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart /> <span>3</span>
           </div>
@@ -100,7 +100,7 @@ export default function Home() {
         />
         <strong>Tênis Asics Gel Kayano 25</strong>
         <span>R$ 459,90</span>
-        <button type="submit">
+        <button type="button">
           <div>
             <MdAddShoppingCart /> <span>3</span>
           </div>
