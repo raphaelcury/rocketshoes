@@ -36,6 +36,7 @@ export const Container = styled.div`
       align-items: baseline;
       span {
         font-size: 12px;
+        font-weight: bold;
         color: #999;
         margin-right: 5px;
         text-transform: uppercase;
