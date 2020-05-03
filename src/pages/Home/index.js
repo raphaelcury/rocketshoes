@@ -13,10 +13,10 @@ export default class Home extends Component {
 
   async componentDidMount() {
     const response = await api.get('/products');
-    const products = response.data.map(product => ({
+    const products = response.data.map((product) => ({
       ...product,
       formattedPrice: formatPrice(product.price),
-    }))
+    }));
     this.setState({ products });
   }
 
