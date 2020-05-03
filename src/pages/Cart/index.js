@@ -36,7 +36,12 @@ function Cart({ cart }) {
                   <button type="button">
                     <MdAddCircleOutline size={20} />
                   </button>
-                  <input type="text" name="qtd" id="qtd" value="2" />
+                  <input
+                    type="text"
+                    name="qtd"
+                    id="qtd"
+                    value={product.amount}
+                  />
                   <button type="button">
                     <MdRemoveCircleOutline size={20} />
                   </button>
