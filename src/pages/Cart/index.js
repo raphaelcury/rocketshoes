@@ -6,15 +6,14 @@ import {
 } from 'react-icons/md';
 import { connect } from 'react-redux';
 
+import * as CartActions from '../../store/modules/cart/actions';
+
 import { Container, ProductTable } from './styles';
 
 class Cart extends Component {
   handleDeleteButton = (productId) => {
     const { dispatch } = this.props;
-    dispatch({
-      type: 'REMOVE_FROM_CART',
-      productId,
-    });
+    dispatch(CartActions.removeFromCart(productId));
   };
 
   render() {
