@@ -1,9 +1,9 @@
 export const addToCart = (product) => ({
-  type: 'ADD_TO_CART',
+  type: '@cart/ADD',
   product,
 });
 
 export const removeFromCart = (productId) => ({
-  type: 'REMOVE_FROM_CART',
+  type: '@cart/REMOVE',
   productId,
 });
