@@ -5,6 +5,7 @@ import {
   MdDelete,
 } from 'react-icons/md';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import * as CartActions from '../../store/modules/cart/actions';
 
@@ -12,8 +13,8 @@ import { Container, ProductTable } from './styles';
 
 class Cart extends Component {
   handleDeleteButton = (productId) => {
-    const { dispatch } = this.props;
-    dispatch(CartActions.removeFromCart(productId));
+    const { removeFromCart } = this.props;
+    removeFromCart(productId);
   };
 
   render() {
@@ -87,4 +88,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart,
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
