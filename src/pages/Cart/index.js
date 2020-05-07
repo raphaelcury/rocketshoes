@@ -12,6 +12,16 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { Container, ProductTable } from './styles';
 
 class Cart extends Component {
+  handleAddButton = (product) => {
+    const { updateProductAmount } = this.props;
+    updateProductAmount(product.id, product.amount + 1);
+  };
+
+  handleRemoveButton = (product) => {
+    const { updateProductAmount } = this.props;
+    updateProductAmount(product.id, product.amount - 1);
+  };
+
   handleDeleteButton = (productId) => {
     const { removeFromCart } = this.props;
     removeFromCart(productId);
@@ -44,7 +54,10 @@ class Cart extends Component {
                 <td className="qtd">
                   <div>
                     <button type="button">
-                      <MdAddCircleOutline size={20} />
+                      <MdAddCircleOutline
+                        size={20}
+                        onClick={() => this.handleAddButton(product)}
+                      />
                     </button>
                     <input
                       type="text"
@@ -53,7 +66,10 @@ class Cart extends Component {
                       value={product.amount}
                     />
                     <button type="button">
-                      <MdRemoveCircleOutline size={20} />
+                      <MdRemoveCircleOutline
+                        size={20}
+                        onClick={() => this.handleRemoveButton(product)}
+                      />
                     </button>
                   </div>
                 </td>
