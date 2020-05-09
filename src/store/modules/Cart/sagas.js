@@ -2,26 +2,25 @@ import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
-import { addToCartSuccess, updateProductAmount } from './actions';
+import {
+  addToCartSuccess,
+  updateProductAmountRequest,
+  updateProductAmountSuccess,
+} from './actions';
 
 function* addToCart({ productId }) {
   const existingProduct = yield select((state) =>
     state.cart.find((product) => product.id === productId)
   );
-
   const stockReq = yield call(api.get, `/stock/${productId}`);
   const stockAmount = stockReq.data.amount || 0;
-  const cartAmount = existingProduct ? existingProduct.amount : 0;
-  const newCartAmount = cartAmount + 1;
-
-  if (newCartAmount > stockAmount) {
-    toast.error(
-      'Não é possível adicionar. Quantidade excede estoque disponível do produto'
-    );
-    return;
-  }
-
   if (!existingProduct) {
+    if (stockAmount <= 0) {
+      toast.error(
+        'Não é possível alterar. Quantidade excede estoque disponível do produto'
+      );
+      return;
+    }
     const response = yield call(api.get, `/products/${productId}`);
     const productData = {
       ...response.data,
@@ -29,7 +28,25 @@ function* addToCart({ productId }) {
     };
     yield put(addToCartSuccess(productData));
   } else {
-    yield put(updateProductAmount(existingProduct.id, newCartAmount));
+    yield put(
+      updateProductAmountRequest(existingProduct.id, existingProduct.amount + 1)
+    );
   }
 }
-export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
+
+function* updateProductAmount({ productId, amount }) {
+  const stockReq = yield call(api.get, `/stock/${productId}`);
+  const stockAmount = stockReq.data.amount || 0;
+  if (amount > stockAmount) {
+    toast.error(
+      'Não é possível alterar. Quantidade excede estoque disponível do produto'
+    );
+    return;
+  }
+  yield put(updateProductAmountSuccess(productId, amount));
+}
+
+export default all([
+  takeLatest('@cart/ADD_REQUEST', addToCart),
+  takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateProductAmount),
+]);

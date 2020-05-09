@@ -14,13 +14,13 @@ import { Container, ProductTable } from './styles';
 
 class Cart extends Component {
   handleAddButton = (product) => {
-    const { updateProductAmount } = this.props;
-    updateProductAmount(product.id, product.amount + 1);
+    const { updateProductAmountRequest } = this.props;
+    updateProductAmountRequest(product.id, product.amount + 1);
   };
 
   handleRemoveButton = (product) => {
-    const { updateProductAmount } = this.props;
-    updateProductAmount(product.id, product.amount - 1);
+    const { updateProductAmountRequest } = this.props;
+    updateProductAmountRequest(product.id, product.amount - 1);
   };
 
   handleDeleteButton = (productId) => {

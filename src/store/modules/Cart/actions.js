@@ -9,15 +9,21 @@ export const addToCartSuccess = (product) => ({
   product,
 });
 
+export const updateProductAmountRequest = (productId, amount) => ({
+  type: '@cart/UPDATE_AMOUNT_REQUEST',
+  productId,
+  amount,
+});
+
+export const updateProductAmountSuccess = (productId, amount) => ({
+  type: '@cart/UPDATE_AMOUNT_SUCCESS',
+  productId,
+  amount,
+});
+
 // End Saga Actions
 
 export const removeFromCart = (productId) => ({
   type: '@cart/REMOVE',
   productId,
-});
-
-export const updateProductAmount = (productId, amount) => ({
-  type: '@cart/UPDATE_AMOUNT',
-  productId,
-  amount,
 });
