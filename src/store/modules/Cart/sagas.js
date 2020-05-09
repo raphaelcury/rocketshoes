@@ -8,17 +8,25 @@ import {
   updateProductAmountSuccess,
 } from './actions';
 
+function* checkStock(productId, amount) {
+  const stockReq = yield call(api.get, `/stock/${productId}`);
+  const stockAmount = stockReq.data.amount || 0;
+  if (amount > stockAmount) {
+    toast.error(
+      'Não é possível alterar. Quantidade excede estoque disponível do produto'
+    );
+    return false;
+  }
+  return true;
+}
+
 function* addToCart({ productId }) {
   const existingProduct = yield select((state) =>
     state.cart.find((product) => product.id === productId)
   );
-  const stockReq = yield call(api.get, `/stock/${productId}`);
-  const stockAmount = stockReq.data.amount || 0;
   if (!existingProduct) {
-    if (stockAmount <= 0) {
-      toast.error(
-        'Não é possível alterar. Quantidade excede estoque disponível do produto'
-      );
+    const stockOk = yield call(checkStock, productId, 1);
+    if (!stockOk) {
       return;
     }
     const response = yield call(api.get, `/products/${productId}`);
@@ -35,12 +43,8 @@ function* addToCart({ productId }) {
 }
 
 function* updateProductAmount({ productId, amount }) {
-  const stockReq = yield call(api.get, `/stock/${productId}`);
-  const stockAmount = stockReq.data.amount || 0;
-  if (amount > stockAmount) {
-    toast.error(
-      'Não é possível alterar. Quantidade excede estoque disponível do produto'
-    );
+  const stockOk = yield call(checkStock, productId, amount);
+  if (!stockOk) {
     return;
   }
   yield put(updateProductAmountSuccess(productId, amount));
