@@ -42,7 +42,7 @@ function* addToCart({ productId }) {
 }
 
 function* updateProductAmount({ productId, amount }) {
-  if (!(yield call(checkStock, productId, amount))) {
+  if (amount <= 0 || !(yield call(checkStock, productId, amount))) {
     return;
   }
   yield put(updateProductAmountSuccess(productId, amount));
