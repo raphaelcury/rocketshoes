@@ -1,4 +1,5 @@
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import api from '../../../services/api';
 import { addToCartSuccess, updateProductAmount } from './actions';
@@ -14,7 +15,9 @@ function* addToCart({ productId }) {
   const newCartAmount = cartAmount + 1;
 
   if (newCartAmount > stockAmount) {
-    console.tron.log('AMOUNT ERROR');
+    toast.error(
+      'Não é possível adicionar. Quantidade excede estoque disponível do produto'
+    );
     return;
   }
 
