@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import {
   MdAddCircleOutline,
   MdRemoveCircleOutline,
@@ -14,26 +14,17 @@ import { formatPrice } from '../../util/format';
 import { Container, ProductTable } from './styles';
 
 function Cart({ cart, total, updateProductAmountRequest, removeFromCart }) {
-  const handleAddButton = useCallback(
-    (product) => {
-      updateProductAmountRequest(product.id, product.amount + 1);
-    },
-    [updateProductAmountRequest]
-  );
+  function handleAddButton(product) {
+    updateProductAmountRequest(product.id, product.amount + 1);
+  }
 
-  const handleRemoveButton = useCallback(
-    (product) => {
-      updateProductAmountRequest(product.id, product.amount - 1);
-    },
-    [updateProductAmountRequest]
-  );
+  function handleRemoveButton(product) {
+    updateProductAmountRequest(product.id, product.amount - 1);
+  }
 
-  const handleDeleteButton = useCallback(
-    (productId) => {
-      removeFromCart(productId);
-    },
-    [removeFromCart]
-  );
+  function handleDeleteButton(productId) {
+    removeFromCart(productId);
+  }
 
   return (
     <Container>
