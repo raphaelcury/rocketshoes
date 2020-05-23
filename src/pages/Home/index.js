@@ -25,12 +25,9 @@ function Home({ amount, addToCartRequest }) {
     getProducts();
   }, []);
 
-  const handleAddProduct = useCallback(
-    (productId) => {
-      addToCartRequest(productId);
-    },
-    [addToCartRequest]
-  );
+  function handleAddProduct(productId) {
+    addToCartRequest(productId);
+  }
 
   return (
     <ProductList>
