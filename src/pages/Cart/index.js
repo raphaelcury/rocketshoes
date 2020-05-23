@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   MdAddCircleOutline,
   MdRemoveCircleOutline,
@@ -14,17 +14,26 @@ import { formatPrice } from '../../util/format';
 import { Container, ProductTable } from './styles';
 
 function Cart({ cart, total, updateProductAmountRequest, removeFromCart }) {
-  function handleAddButton(product) {
-    updateProductAmountRequest(product.id, product.amount + 1);
-  }
+  const handleAddButton = useCallback(
+    (product) => {
+      updateProductAmountRequest(product.id, product.amount + 1);
+    },
+    [updateProductAmountRequest]
+  );
 
-  function handleRemoveButton(product) {
-    updateProductAmountRequest(product.id, product.amount - 1);
-  }
+  const handleRemoveButton = useCallback(
+    (product) => {
+      updateProductAmountRequest(product.id, product.amount - 1);
+    },
+    [updateProductAmountRequest]
+  );
 
-  function handleDeleteButton(productId) {
-    removeFromCart(productId);
-  }
+  const handleDeleteButton = useCallback(
+    (productId) => {
+      removeFromCart(productId);
+    },
+    [removeFromCart]
+  );
 
   return (
     <Container>
@@ -38,7 +47,7 @@ function Cart({ cart, total, updateProductAmountRequest, removeFromCart }) {
         </thead>
         <tbody>
           {cart.map((product) => (
-            <tr>
+            <tr key={product.id}>
               <td className="productImage">
                 <img src={product.image} alt="Tênis" />
               </td>
@@ -97,13 +106,8 @@ function Cart({ cart, total, updateProductAmountRequest, removeFromCart }) {
 }
 
 Cart.propTypes = {
-  cart: PropTypes.objectOf({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  }).isRequired,
-  total: PropTypes.number.isRequired,
+  cart: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  total: PropTypes.string.isRequired,
   updateProductAmountRequest: PropTypes.func.isRequired,
   removeFromCart: PropTypes.func.isRequired,
 };
