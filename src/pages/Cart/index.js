@@ -19,8 +19,8 @@ export default function Cart() {
       subTotal: formatPrice(product.price * product.amount),
     }))
   );
-  const total = useSelector(
-    formatPrice((state) =>
+  const total = useSelector((state) =>
+    formatPrice(
       state.cart.reduce(
         (sum, product) => sum + product.price * product.amount,
         0
