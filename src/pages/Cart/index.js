@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   MdAddCircleOutline,
   MdRemoveCircleOutline,
@@ -13,94 +13,100 @@ import { formatPrice } from '../../util/format';
 
 import { Container, ProductTable } from './styles';
 
-class Cart extends Component {
-  handleAddButton = (product) => {
-    const { updateProductAmountRequest } = this.props;
+function Cart({ cart, total, updateProductAmountRequest, removeFromCart }) {
+  function handleAddButton(product) {
     updateProductAmountRequest(product.id, product.amount + 1);
-  };
-
-  handleRemoveButton = (product) => {
-    const { updateProductAmountRequest } = this.props;
-    updateProductAmountRequest(product.id, product.amount - 1);
-  };
-
-  handleDeleteButton = (productId) => {
-    const { removeFromCart } = this.props;
-    removeFromCart(productId);
-  };
-
-  render() {
-    const { cart, total } = this.props;
-    return (
-      <Container>
-        <ProductTable>
-          <thead>
-            <th> </th>
-            <th>PRODUTO</th>
-            <th>QTD</th>
-            <th>SUBTOTAL</th>
-            <th> </th>
-          </thead>
-          <tbody>
-            {cart.map((product) => (
-              <tr>
-                <td className="productImage">
-                  <img src={product.image} alt="Tênis" />
-                </td>
-                <td className="product">
-                  <div>
-                    <strong>{product.title}</strong>
-                    <span>{product.formattedPrice}</span>
-                  </div>
-                </td>
-                <td className="qtd">
-                  <div>
-                    <button type="button">
-                      <MdAddCircleOutline
-                        size={20}
-                        onClick={() => this.handleAddButton(product)}
-                      />
-                    </button>
-                    <input
-                      type="text"
-                      name="qtd"
-                      id="qtd"
-                      value={product.amount}
-                    />
-                    <button type="button">
-                      <MdRemoveCircleOutline
-                        size={20}
-                        onClick={() => this.handleRemoveButton(product)}
-                      />
-                    </button>
-                  </div>
-                </td>
-                <td className="subtotal">
-                  <strong>{product.subTotal}</strong>
-                </td>
-                <td className="delete">
-                  <button
-                    type="button"
-                    onClick={() => this.handleDeleteButton(product.id)}
-                  >
-                    <MdDelete size={20} />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </ProductTable>
-        <footer>
-          <button type="submit">Finalizar Pedido</button>
-          <div>
-            <span>Total</span>
-            <strong>{total}</strong>
-          </div>
-        </footer>
-      </Container>
-    );
   }
+
+  function handleRemoveButton(product) {
+    updateProductAmountRequest(product.id, product.amount - 1);
+  }
+
+  function handleDeleteButton(productId) {
+    removeFromCart(productId);
+  }
+
+  return (
+    <Container>
+      <ProductTable>
+        <thead>
+          <th> </th>
+          <th>PRODUTO</th>
+          <th>QTD</th>
+          <th>SUBTOTAL</th>
+          <th> </th>
+        </thead>
+        <tbody>
+          {cart.map((product) => (
+            <tr>
+              <td className="productImage">
+                <img src={product.image} alt="Tênis" />
+              </td>
+              <td className="product">
+                <div>
+                  <strong>{product.title}</strong>
+                  <span>{product.formattedPrice}</span>
+                </div>
+              </td>
+              <td className="qtd">
+                <div>
+                  <button type="button">
+                    <MdAddCircleOutline
+                      size={20}
+                      onClick={() => handleAddButton(product)}
+                    />
+                  </button>
+                  <input
+                    type="text"
+                    name="qtd"
+                    id="qtd"
+                    value={product.amount}
+                  />
+                  <button type="button">
+                    <MdRemoveCircleOutline
+                      size={20}
+                      onClick={() => handleRemoveButton(product)}
+                    />
+                  </button>
+                </div>
+              </td>
+              <td className="subtotal">
+                <strong>{product.subTotal}</strong>
+              </td>
+              <td className="delete">
+                <button
+                  type="button"
+                  onClick={() => handleDeleteButton(product.id)}
+                >
+                  <MdDelete size={20} />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </ProductTable>
+      <footer>
+        <button type="submit">Finalizar Pedido</button>
+        <div>
+          <span>Total</span>
+          <strong>{total}</strong>
+        </div>
+      </footer>
+    </Container>
+  );
 }
+
+Cart.propTypes = {
+  cart: PropTypes.objectOf({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+  }).isRequired,
+  total: PropTypes.number.isRequired,
+  updateProductAmountRequest: PropTypes.func.isRequired,
+  removeFromCart: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   cart: state.cart.map((product) => ({
