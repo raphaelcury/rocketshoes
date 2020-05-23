@@ -39,11 +39,13 @@ function Cart({ cart, total, updateProductAmountRequest, removeFromCart }) {
     <Container>
       <ProductTable>
         <thead>
-          <th> </th>
-          <th>PRODUTO</th>
-          <th>QTD</th>
-          <th>SUBTOTAL</th>
-          <th> </th>
+          <tr>
+            <th> </th>
+            <th>PRODUTO</th>
+            <th>QTD</th>
+            <th>SUBTOTAL</th>
+            <th> </th>
+          </tr>
         </thead>
         <tbody>
           {cart.map((product) => (
